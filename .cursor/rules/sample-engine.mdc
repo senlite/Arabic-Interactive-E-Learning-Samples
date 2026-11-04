@@ -1,0 +1,23 @@
+---
+description: Self-contained vanilla samples with content split from logic
+globs: "**/{app,content,i18n}.js,**/index.html"
+alwaysApply: false
+---
+
+# Sample engine
+
+Plain HTML, CSS, and vanilla JS (ES2018+). No framework and no activity build step. Load content with `<script src="content.js">` as `window.CONTENT`, not `fetch()`.
+
+- `content.js` holds text, scores, and `next` ids. `app.js` holds the screen router.
+- Shared files live in `shared/` and are copied by `scripts/sync-shared.mjs`. Edit the shared source, then sync.
+- State stays in memory, with optional `sessionStorage`. Do not send data anywhere except the SCORM API.
+- Feedback scenario: choices worth 10 / 5 / 0, max 30; endings 25–30, 15–20, 0–10; shuffle choices; no back button inside the scenario.
+- Safety challenge: 100 base per question; +50 time bonus only if the timer is on and at least half the time remains; hotspot 33 per hazard and −10 per empty click (floor 0); order 100 if fully correct else 25 per correct slot, and a life is lost unless the whole order is right; 3 lives; timers 30/20/45/60s; pass at 700 base points.
+
+```js
+// ❌ BAD
+const data = await fetch("./content.json");
+
+// ✅ GOOD
+const node = window.CONTENT.nodes[state.nodeId];
+```

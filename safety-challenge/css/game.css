@@ -1,0 +1,170 @@
+.game {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 1rem;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+.hud {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  background: var(--color-bg);
+  padding-block: 0.5rem;
+}
+
+.progress {
+  flex-basis: 100%;
+  block-size: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress > span {
+  display: block;
+  block-size: 100%;
+  background: var(--color-primary);
+  inline-size: 0;
+}
+
+.rules,
+.choice,
+.order-card,
+.primary {
+  min-block-size: 44px;
+  min-inline-size: 44px;
+}
+
+.choice,
+.primary,
+.tiny {
+  font: inherit;
+  border: 2px solid var(--color-primary);
+  background: #fff;
+  color: var(--color-text);
+  border-radius: 12px;
+  padding: 0.6rem 0.8rem;
+  margin-block-end: 8px;
+  inline-size: 100%;
+  text-align: start;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.choice:focus-visible,
+.primary:focus-visible,
+.tiny:focus-visible,
+.zone:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.scene {
+  position: relative;
+  background: #e8eef0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.scene img,
+.scene svg.placeholder {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.zone {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  min-block-size: 44px;
+  min-inline-size: 44px;
+}
+
+.marker {
+  position: absolute;
+  z-index: 1;
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 999px;
+  background: var(--color-success);
+  color: #fff;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+body.debug .zone {
+  outline: 2px solid var(--color-error);
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.order-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(31, 41, 55, 0.12);
+  padding: 0.4rem;
+  margin-block-end: 8px;
+}
+
+.handle {
+  touch-action: none;
+  cursor: grab;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  min-block-size: 44px;
+  min-inline-size: 44px;
+}
+
+.tiny {
+  inline-size: auto;
+  margin: 0;
+}
+
+.feedback {
+  margin-block-start: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  border-inline-start: 4px solid var(--color-primary);
+}
+
+.live-assertive:not(:empty) {
+  font-weight: 700;
+  color: var(--color-error);
+}
+
+.medal {
+  inline-size: 96px;
+  block-size: 96px;
+}
+
+.sign {
+  inline-size: 120px;
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

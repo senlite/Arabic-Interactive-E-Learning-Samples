@@ -1,0 +1,21 @@
+---
+description: Follow Docs/TechnologyStack.md and ask before changing it
+alwaysApply: true
+---
+
+# Technology stack
+
+Read `Docs/TechnologyStack.md` before adding a library, tool, runtime, hosting target, or package format. Implement only what that file allows.
+
+- Activities stay HTML, CSS, and vanilla JavaScript. Do not add a UI framework, TypeScript, a bundler, or a backend.
+- LMS integration stays SCORM 1.2 plus the logging xAPI stub.
+- Packaging stays the Node script that uses `archiver`.
+
+If a task needs a stack change, stop and ask before editing code or `Docs/TechnologyStack.md`. The question must name the current choice, the proposed change, and why the current stack cannot do the job.
+
+```text
+❌ Add React because a component would be easier, and update TechnologyStack.md
+✅ Ask: "TechnologyStack.md specifies vanilla JS. Should I update it to allow React for this screen, or keep the activity in vanilla JS?"
+```
+
+Do not treat a workaround or a prototype as permission to change the stack. Update `Docs/TechnologyStack.md` only after the user agrees.

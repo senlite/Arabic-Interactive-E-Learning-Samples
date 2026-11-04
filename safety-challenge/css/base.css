@@ -1,0 +1,73 @@
+:root {
+  --color-bg: #F7F8FA;
+  --color-primary: #0F766E;
+  --color-warning: #B45309;
+  --color-success: #15803D;
+  --color-error: #B91C1C;
+  --color-text: #1F2937;
+  --font-stack: 'Cairo', 'Tajawal', 'Noto Sans Arabic', Tahoma, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-stack);
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: normal;
+}
+
+.skip-link {
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-start: 0.5rem;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-150%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+main {
+  max-inline-size: 720px;
+  margin-inline: auto;
+  padding-block: 1.5rem;
+  padding-inline: 1.5rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+
+a,
+button {
+  min-block-size: 44px;
+  min-inline-size: 44px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,21 @@
+---
+description: Learner-facing Arabic must match the build spec verbatim
+globs: "**/content.js,**/index.html"
+alwaysApply: false
+---
+
+# Verbatim Arabic
+
+Learner-facing strings come from `Docs/Arabic-eLearning-Samples-Requirements.md` (§4.5, §5.5, §5.6, §6). Paste them exactly. Do not rephrase, translate, or "fix" spelling.
+
+- Pages use `<html lang="ar" dir="rtl">`.
+- Numerals in the UI stay Western (`0–9`) unless `useArabicIndicDigits` is turned on.
+- Wrap mixed Latin (`CO₂`, `RACE`, `SBI`, `Near Miss`, `ISO 7010`) in `<bdi>` or `<span dir="ltr">` when order breaks.
+
+```html
+<!-- ❌ BAD: reworded objective -->
+<li>استخدم نموذج SBI عند إعطاء الملاحظات.</li>
+
+<!-- ✅ GOOD: spec §3.1 / §4.5 -->
+<li>تطبيق نموذج «الموقف – السلوك – الأثر» لبدء محادثة التغذية الراجعة بوقائع محددة.</li>
+```

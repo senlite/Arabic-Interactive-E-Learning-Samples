@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SCORM 1.2 harness</title>
+  <style>
+    body { font-family: sans-serif; margin: 1rem; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 0.25rem 0.5rem; text-align: left; }
+    iframe { width: 100%; height: 70vh; border: 1px solid #333; }
+  </style>
+</head>
+<body>
+  <h1>SCORM 1.2 harness</h1>
+  <table>
+    <thead>
+      <tr><th>Call</th><th>Argument</th><th>Value</th></tr>
+    </thead>
+    <tbody id="log"></tbody>
+  </table>
+  <iframe id="sample" title="Sample"></iframe>
+  <script>
+    (function () {
+      var values = { 'cmi.core.lesson_status': 'not attempted' };
+      var body = document.getElementById('log');
+      function row(name, arg, value) {
+        var tr = document.createElement('tr');
+        [name, arg || '', value || ''].forEach(function (text) {
+          var td = document.createElement('td');
+          td.textContent = text;
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      }
+      window.API = {
+        LMSInitialize: function () { row('LMSInitialize'); return 'true'; },
+        LMSSetValue: function (key, value) { values[key] = String(value); row('LMSSetValue', key, value); return 'true'; },
+        LMSGetValue: function (key) { var value = Object.prototype.hasOwnProperty.call(values, key) ? values[key] : ''; row('LMSGetValue', key, value); return value; },
+        LMSCommit: function () { row('LMSCommit'); return 'true'; },
+        LMSFinish: function () { row('LMSFinish'); return 'true'; },
+        LMSGetLastError: function () { row('LMSGetLastError', '', '0'); return '0'; },
+        LMSGetErrorString: function (code) { row('LMSGetErrorString', code, ''); return ''; },
+        LMSGetDiagnostic: function (code) { row('LMSGetDiagnostic', code, ''); return ''; }
+      };
+      var sample = new URLSearchParams(location.search).get('sample');
+      var folder = sample === 'safety-challenge' ? 'safety-challenge' : 'feedback-scenario';
+      document.getElementById('sample').src = '../' + folder + '/index.html';
+    })();
+  </script>
+</body>
+</html>

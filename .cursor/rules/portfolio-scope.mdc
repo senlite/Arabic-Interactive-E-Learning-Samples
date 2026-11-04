@@ -1,0 +1,21 @@
+---
+description: Two-day portfolio scope, assets, and test-first rules
+alwaysApply: true
+---
+
+# Portfolio scope
+
+Build only the two samples in the spec: `feedback-scenario/` and `safety-challenge/`, plus the landing page, SCORM 1.2 zips, `CREDITS.md`, and a bilingual README. Read `.specify/memory/constitution.md` and `Docs/Arabic-eLearning-Samples-Requirements.md` before changing behaviour.
+
+Do not add: client source conversion, Storyline, H5P, Genially, SCORM 2004, cmi5, a live LRS, a backend, login, runtime AI characters, voice-over, an English activity, or a gender toggle.
+
+If time is short, cut in this order: xAPI stub, interactions, Moodle test, self-hosted fonts, landing-page polish. Keep the SCORM Cloud check.
+
+- Images are generated for this project or free-licensed. Record source and licence in `CREDITS.md`. No unclear stock and no real company logos.
+- Programmable rules (score bands, branching `next`, lives, shuffle, SCORM mapping) need a failing automated check before the code that makes it pass.
+- Footer default: «نموذج تجريبي من إعداد Twin Particles».
+
+```text
+❌ Add a Node API to store scores
+✅ Keep score in memory and report it through SCORM 1.2 when an LMS API exists
+```

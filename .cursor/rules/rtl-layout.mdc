@@ -1,0 +1,24 @@
+---
+description: RTL layout uses logical CSS and a 360px mobile baseline
+globs: "**/*.{css,html}"
+alwaysApply: false
+---
+
+# RTL layout
+
+Use logical CSS properties only. Do not use `left`, `right`, `margin-left`, `padding-right`, or `text-align: left`.
+
+- Progress fills from the inline start (right in RTL). «التالي» chevrons point left. Do not mirror clocks, checkmarks, or logos.
+- Design at 360×640 first. Max content width 720px. No horizontal scroll. Touch targets at least 44×44px with 8px gaps.
+- Body text at least 16px, line-height 1.7. Do not letter-space Arabic.
+- Fonts: Cairo for UI, Tajawal or IBM Plex Sans Arabic for body, fallback `'Cairo', 'Tajawal', 'Noto Sans Arabic', Tahoma, sans-serif`.
+- Colours: `#F7F8FA`, `#0F766E`, `#B45309`, `#15803D`, `#B91C1C`, `#1F2937`. Honour `prefers-reduced-motion`; animations at most 300ms.
+- Paths in activities are relative (`./css/style.css`).
+
+```css
+/* ❌ BAD */
+.card { margin-left: 16px; text-align: left; }
+
+/* ✅ GOOD */
+.card { margin-inline-start: 16px; text-align: start; }
+```

@@ -1,0 +1,63 @@
+:root {
+  color: #1F2937;
+  background: #F7F8FA;
+  font-family: "Cairo", "Tajawal", "Noto Sans Arabic", Tahoma, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 24px 16px 48px;
+  background: #F7F8FA;
+  color: #1F2937;
+}
+
+h1, h2, p { letter-spacing: 0; }
+
+.banner, .cards, .note {
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.cards {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 720px) {
+  .cards { grid-template-columns: 1fr 1fr; }
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #0F766E;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.try, .download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #0F766E;
+  color: #fff;
+  text-decoration: none;
+}
+
+.try:focus-visible, .download:focus-visible {
+  outline: 3px solid #1F2937;
+  outline-offset: 2px;
+}

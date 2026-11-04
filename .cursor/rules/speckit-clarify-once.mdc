@@ -1,0 +1,21 @@
+---
+description: During speckit-clarify, ask every needed question in one turn
+alwaysApply: true
+---
+
+# Clarify in one pass
+
+When the user runs `/speckit-clarify`, collect every question this pass still needs answered and ask them in a single message. Wait for the answers before writing the spec.
+
+- Scan the active spec once. Include every question whose answer changes behaviour, data, acceptance tests, or scope.
+- Do not cap the set at 5. If more than 5 questions are needed, ask all of them in that same message.
+- Number them. Each item starts with `**Question:**` and ends with `?`.
+- Give options or a suggested short answer under that question. Mark one recommended choice.
+- Do not send a second question after the user answers the first. Do not hide later questions for a follow-up turn.
+- If a reply misses a number, ask only for the missing numbers. Do not add new questions in that follow-up.
+- If nothing material is ambiguous, say so and ask nothing.
+
+```text
+❌ Ask question 1, wait, then reveal question 2
+✅ Send every needed question together, including when there are more than 5, then update the spec after one reply
+```

@@ -1,0 +1,27 @@
+---
+description: SCORM 1.2 runtime and package contract
+globs: "**/scorm12.js,**/imsmanifest.xml,**/xapi-stub.js,scripts/package.mjs"
+alwaysApply: false
+---
+
+# SCORM 1.2
+
+Zip the folder contents so `imsmanifest.xml` is at the zip root and every file is listed. Schema version is 1.2. `masteryscore` 70 belongs only on the safety challenge.
+
+Runtime order: `LMSInitialize` → `lesson_status` `incomplete` → score min/max/raw → status → `LMSCommit` → `session_time` → `LMSFinish` once. Also finish on `pagehide`. Never call `LMSFinish` twice. If no API exists, log and return; do not throw.
+
+- Feedback scenario: on debrief, `score.raw = round(total/30×100)`, status `completed`. No pass/fail.
+- Safety challenge: on results or game over, `score.raw` from base points / 1000, status `passed` if ≥ 70 else `failed`.
+- Retry overwrites the score only when the new score is higher.
+- `xapi-stub.js` may `console.info` statements. Do not set an endpoint or put credentials in the repo.
+- Interactions (`cmi.interactions.*`) are optional and must sit in try/catch.
+
+```js
+// ❌ BAD: finish on every screen, throw when standalone
+api.LMSFinish("");
+
+// ✅ GOOD
+if (!SCORM.isLMS()) { /* show saved_standalone */ }
+else { SCORM.score(raw); SCORM.status("completed"); SCORM.commit(); }
+// «إنهاء النشاط» and pagehide call SCORM.finish() once
+```

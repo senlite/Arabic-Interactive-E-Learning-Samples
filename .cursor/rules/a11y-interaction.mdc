@@ -1,0 +1,25 @@
+---
+description: Keyboard, non-colour feedback, and adjustable timers
+globs: "**/*.{html,css,js}"
+alwaysApply: false
+---
+
+# Accessible interaction
+
+Aim at the WCAG 2.2 items in spec §7.4. Use semantic HTML, a skip link, and a visible `:focus-visible` outline (3px). Move focus to the new screen heading on each change.
+
+- Clickable items are `<button>` elements. Full keyboard use: Tab, Enter, Space.
+- Drag-to-order needs a Pointer Events handle (`touch-action: none` only on the handle) plus ▲/▼ buttons. Shuffle must not equal the correct order.
+- Hotspots are `<button>`s positioned in percentages. `?debug=1` outlines zones. Empty taps show the spec message and cost 10 points.
+- Rating and correctness use icon + text + colour (green / amber / red). Do not rely on colour alone.
+- `aria-live="polite"` for feedback, score, and lives. `aria-live="assertive"` only for time-out. Announce the timer at 10s, not every second.
+- The start screen includes «تشغيل المؤقت», on by default. Off means no countdown, no time-out, and no time bonus.
+- Images need Arabic `alt`. Decorative images use `alt=""`.
+
+```html
+<!-- ❌ BAD: colour-only, no keyboard alternative -->
+<div class="ok" onclick="pick()">Good</div>
+
+<!-- ✅ GOOD -->
+<button type="button">موفّق ✔</button>
+```
