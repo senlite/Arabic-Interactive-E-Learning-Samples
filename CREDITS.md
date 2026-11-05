@@ -8,7 +8,7 @@
 | `feedback-scenario/img/end-best.webp` | ChatGPT image generation. prompt: Flat vector, a smiling team celebrating a completed task, soft teal, no text. File not in the repo yet. | Generated for this project |
 | `feedback-scenario/img/end-ok.webp` | ChatGPT image generation. prompt: Flat vector, a calm office conversation with a mixed outcome, no text. File not in the repo yet. | Generated for this project |
 | `feedback-scenario/img/end-poor.webp` | ChatGPT image generation. prompt: Flat vector, a strained but respectful office conversation, no text. File not in the repo yet. | Generated for this project |
-| `safety-challenge/img/warehouse.webp` | ChatGPT image generation. prompt: Flat vector illustration, clean modern warehouse interior, wide 16:9 view, puddle, blocked exit, cable across the walkway, mounted extinguisher, worker in hard hat and hi-vis, no text, no logos. File not in the repo yet. | Generated for this project |
+| `safety-challenge/img/warehouse.svg` | Drawn for this project. A warehouse aisle: blocked green exit with boxes, red wall extinguisher, worker in a yellow hard hat and orange vest, black cable across the walkway, and a blue puddle. No words and no logos. | Original |
 | `safety-challenge/img/iso7010-m014.svg` | Wikimedia Commons, ISO 7010 M014. https://commons.wikimedia.org/wiki/File:ISO_7010_M014.svg | public domain |
 | `safety-challenge/img/badge-gold.svg` | Drawn for this project in SVG. prompt: gold medal with the Arabic label بطل السلامة. File not in the repo yet. | Original |
 | `safety-challenge/img/badge-silver.svg` | Drawn for this project in SVG. prompt: silver medal with an Arabic label. File not in the repo yet. | Original |

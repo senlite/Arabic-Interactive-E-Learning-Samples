@@ -30,8 +30,8 @@ test('home page matches the front-door contract', async () => {
   assert.match(html, /href="\.\/safety-challenge\/"/);
   assert.match(html, /lang="ar"[^>]*dir="rtl"[^>]*>جرّب النموذج</);
   assert.match(html, /Download SCORM 1\.2/);
-  assert.match(html, /href="\.\/dist\/feedback-scenario-scorm12\.zip"/);
-  assert.match(html, /href="\.\/dist\/safety-challenge-scorm12\.zip"/);
+  assert.match(html, /href="https:\/\/github\.com\/senlite\/Arabic-Interactive-E-Learning-Samples\/releases\/download\/v1\.0\/feedback-scenario-scorm12\.zip"/);
+  assert.match(html, /href="https:\/\/github\.com\/senlite\/Arabic-Interactive-E-Learning-Samples\/releases\/download\/v1\.0\/safety-challenge-scorm12\.zip"/);
   const releaseNotes = html.match(/<!--[^>]*RELEASE_PAGE[^>]*-->/g) || [];
   assert.equal(releaseNotes.length, 1);
   assert.match(releaseNotes[0], /https:\/\/github\.com\/senlite\/Arabic-Interactive-E-Learning-Samples\/releases\/tag\/v1\.0/);
@@ -82,7 +82,7 @@ test('credits name every asset with a source and a licence', async () => {
     'feedback-scenario/img/end-best.webp',
     'feedback-scenario/img/end-ok.webp',
     'feedback-scenario/img/end-poor.webp',
-    'safety-challenge/img/warehouse.webp',
+    'safety-challenge/img/warehouse.svg',
     'safety-challenge/img/badge-gold.svg',
     'safety-challenge/img/badge-silver.svg',
     'safety-challenge/img/badge-bronze.svg'
@@ -117,6 +117,14 @@ test('readme lists unpublished publish commands', async () => {
   assert.match(block, /gh release create v1\.0/);
   assert.match(block, /dist\/feedback-scenario-scorm12\.zip/);
   assert.match(block, /dist\/safety-challenge-scorm12\.zip/);
+});
+
+test('safety hotspot uses a warehouse scene instead of the rectangle stand-in', async () => {
+  const app = await readRoot('safety-challenge/js/app.js');
+  const art = await readRoot('safety-challenge/img/warehouse.svg');
+  assert.match(app, /img\/warehouse\.svg/);
+  assert.match(art, /<svg/);
+  assert.match(art, /puddle|spill|exit|extinguisher|cable/i);
 });
 
 test('activity footers stay Twin Particles', async () => {

@@ -247,10 +247,6 @@
     return '<svg class="medal" viewBox="0 0 96 96" role="img" aria-label="' + name + '"><circle cx="48" cy="40" r="28" fill="' + fill + '"/><path d="M36 64 L48 84 L60 64" fill="' + fill + '"/></svg>';
   }
 
-  function placeholder() {
-    return '<svg class="placeholder" viewBox="0 0 160 90" aria-hidden="true"><rect width="160" height="90" fill="#d7e3e1"/><rect x="10" y="56" width="38" height="24" fill="#7dd3c7"/><rect x="112" y="12" width="38" height="32" fill="#fbbf24"/><rect x="52" y="64" width="58" height="16" fill="#111827"/><rect x="74" y="8" width="24" height="22" fill="#B91C1C"/><circle cx="70" cy="40" r="10" fill="#0F766E"/></svg>';
-  }
-
   function render(moveFocus) {
     clearNode(main);
     var wrap = el('div', 'game');
@@ -456,7 +452,10 @@
 
   function hotspot(q) {
     var box = el('div', 'scene');
-    box.innerHTML = placeholder();
+    var art = document.createElement('img');
+    art.src = 'img/warehouse.svg';
+    art.alt = '';
+    box.appendChild(art);
     box.setAttribute('role', 'img');
     box.setAttribute('aria-label', q.imageAlt);
     var counter = el('p', '');
