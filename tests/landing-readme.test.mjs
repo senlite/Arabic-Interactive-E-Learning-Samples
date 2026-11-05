@@ -82,7 +82,7 @@ test('credits name every asset with a source and a licence', async () => {
     'feedback-scenario/img/end-best.webp',
     'feedback-scenario/img/end-ok.webp',
     'feedback-scenario/img/end-poor.webp',
-    'safety-challenge/img/warehouse.svg',
+    'safety-challenge/img/warehouse.webp',
     'safety-challenge/img/badge-gold.svg',
     'safety-challenge/img/badge-silver.svg',
     'safety-challenge/img/badge-bronze.svg'
@@ -121,10 +121,9 @@ test('readme lists unpublished publish commands', async () => {
 
 test('safety hotspot uses a warehouse scene instead of the rectangle stand-in', async () => {
   const app = await readRoot('safety-challenge/js/app.js');
-  const art = await readRoot('safety-challenge/img/warehouse.svg');
-  assert.match(app, /img\/warehouse\.svg/);
-  assert.match(art, /<svg/);
-  assert.match(art, /puddle|spill|exit|extinguisher|cable/i);
+  const art = await readRoot('safety-challenge/img/warehouse.webp');
+  assert.match(app, /img\/warehouse\.webp/);
+  assert.ok(art.length > 1000);
 });
 
 test('activity footers stay Twin Particles', async () => {

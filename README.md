@@ -4,7 +4,7 @@ Two Arabic workplace samples for a portfolio.
 
 The feedback scenario, «محادثة التغذية الراجعة: موقف قيادي», is a three-decision conversation about giving feedback. The safety challenge, «تحدّي السلامة في موقع العمل», is ten questions about hazards on a work site.
 
-Live links, once GitHub Pages is enabled from the `main` branch root:
+Live links, confirmed on GitHub Pages:
 
 - https://senlite.github.io/Arabic-Interactive-E-Learning-Samples/feedback-scenario/
 - https://senlite.github.io/Arabic-Interactive-E-Learning-Samples/safety-challenge/
@@ -45,7 +45,7 @@ gh release create v1.0 dist/feedback-scenario-scorm12.zip dist/safety-challenge-
 
 محادثة التغذية الراجعة: موقف قيادي هي موقف من ثلاث قرارات. تحدّي السلامة في موقع العمل هو عشرة أسئلة عن مخاطر موقع العمل.
 
-روابط العرض بعد تفعيل GitHub Pages من جذر الفرع `main`:
+روابط العرض المؤكدة على GitHub Pages:
 
 - https://senlite.github.io/Arabic-Interactive-E-Learning-Samples/feedback-scenario/
 - https://senlite.github.io/Arabic-Interactive-E-Learning-Samples/safety-challenge/

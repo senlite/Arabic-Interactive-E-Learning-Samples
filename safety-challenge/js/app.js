@@ -42,6 +42,10 @@
   }
 
   var attempt = load();
+  if ((attempt.screen === 'results' || attempt.screen === 'gameover') && typeof attempt.elapsedSeconds !== 'number') {
+    E.stampElapsed(attempt, Date.now());
+    save();
+  }
 
   function save() {
     sessionStorage.setItem(KEY, JSON.stringify(attempt));
@@ -208,10 +212,14 @@
   function afterFeedback() {
     assertive.textContent = '';
     if (attempt.lives <= 0) {
+      clearClock();
       attempt.screen = 'gameover';
+      E.stampElapsed(attempt, Date.now());
       report();
     } else if (attempt.index >= C.questions.length - 1) {
+      clearClock();
       attempt.screen = 'results';
+      E.stampElapsed(attempt, Date.now());
       report();
     } else {
       attempt.index += 1;
@@ -235,7 +243,7 @@
   }
 
   function elapsed() {
-    var s = Math.max(0, Math.round((Date.now() - attempt.startedAt) / 1000));
+    var s = E.readElapsed(attempt, Date.now());
     return {
       mm: String(Math.floor(s / 60)).padStart(2, '0'),
       ss: String(s % 60).padStart(2, '0')
@@ -453,7 +461,7 @@
   function hotspot(q) {
     var box = el('div', 'scene');
     var art = document.createElement('img');
-    art.src = 'img/warehouse.svg';
+    art.src = 'img/warehouse.webp';
     art.alt = '';
     box.appendChild(art);
     box.setAttribute('role', 'img');

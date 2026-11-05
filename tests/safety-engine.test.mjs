@@ -114,6 +114,17 @@ test('composed proof runs', () => {
   assert.deepEqual(fields(E.scoreOrder(order, steps)), { base: 100, correct: true, lifeLost: false });
 });
 
+test('elapsed time stays fixed after the attempt ends', () => {
+  const E = engine();
+  const attempt = { startedAt: 1000 };
+  assert.equal(E.readElapsed(attempt, 11000), 10);
+  E.stampElapsed(attempt, 11000);
+  assert.equal(attempt.elapsedSeconds, 10);
+  assert.equal(E.readElapsed(attempt, 71000), 10);
+  E.stampElapsed(attempt, 71000);
+  assert.equal(attempt.elapsedSeconds, 10);
+});
+
 test('safety report uses the stored percent for score and status', () => {
   const src = readFileSync(new URL('../safety-challenge/js/app.js', import.meta.url), 'utf8');
   const report = src.slice(src.indexOf('function report()'), src.indexOf('function elapsed()'));

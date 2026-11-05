@@ -65,6 +65,17 @@
     return percent >= 70 ? 'passed' : 'failed';
   }
 
+  function readElapsed(attempt, now) {
+    if (typeof attempt.elapsedSeconds === 'number') return attempt.elapsedSeconds;
+    return Math.max(0, Math.round((now - attempt.startedAt) / 1000));
+  }
+
+  function stampElapsed(attempt, now) {
+    if (typeof attempt.elapsedSeconds === 'number') return attempt.elapsedSeconds;
+    attempt.elapsedSeconds = readElapsed(attempt, now);
+    return attempt.elapsedSeconds;
+  }
+
   function keepBest(previous, next) {
     if (previous === null || previous === undefined) return next;
     return previous > next ? previous : next;
@@ -98,6 +109,8 @@
     scormPercent: scormPercent,
     lessonStatus: lessonStatus,
     keepBest: keepBest,
+    readElapsed: readElapsed,
+    stampElapsed: stampElapsed,
     shuffleOptions: shuffleOptions,
     shuffleSteps: shuffleSteps
   };
