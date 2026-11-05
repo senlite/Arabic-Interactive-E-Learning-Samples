@@ -16,7 +16,7 @@ To run locally, open index.html in a browser. The try links open `feedback-scena
 - `dist/feedback-scenario-scorm12.zip`
 - `dist/safety-challenge-scorm12.zip`
 
-SCORM Cloud was tested with SCORM 1.2 on 5 Nov 2026. The feedback sample should report `completed` plus a score. The safety sample should report `passed` or `failed` against 70. The saved reports are [feedback](media/scorm-feedback-registration.png) (`Completed: true`) and [safety](media/scorm-safety-registration.png) (`Completed: false`, `Satisfied: false`). Neither report shows a score. Moodle is a later check if time allows.
+SCORM Cloud was tested with SCORM 1.2 on 5 Nov 2026. The feedback sample should report `completed` plus a score. The safety sample should report `passed` or `failed` against 70. The saved reports are [feedback](media/scorm-feedback-registration.png) (complete, score 67%) and [safety](media/scorm-safety-registration.png) (failed, score 50%). Moodle is a later check if time allows.
 
 How it was built:
 
@@ -54,7 +54,7 @@ gh release create v1.0 dist/feedback-scenario-scorm12.zip dist/safety-challenge-
 
 يبني `npm run package` الحزمتين `dist/feedback-scenario-scorm12.zip` و`dist/safety-challenge-scorm12.zip`.
 
-تم فحص SCORM Cloud بمعيار SCORM 1.2 في 5 نوفمبر 2026. عينة التغذية الراجعة تُبلّغ `completed` مع درجة. عينة السلامة تُبلّغ `passed` أو `failed` مقابل 70. التقريران المحفوظان: media/scorm-feedback-registration.png (`Completed: true`) وmedia/scorm-safety-registration.png (`Completed: false` و`Satisfied: false`). لا يظهر أي تقرير درجة. Moodle لاحقًا إذا سمح الوقت.
+تم فحص SCORM Cloud بمعيار SCORM 1.2 في 5 نوفمبر 2026. عينة التغذية الراجعة تُبلّغ `completed` مع درجة. عينة السلامة تُبلّغ `passed` أو `failed` مقابل 70. التقريران المحفوظان: media/scorm-feedback-registration.png (مكتمل، الدرجة 67%) وmedia/scorm-safety-registration.png (راسب `failed`، الدرجة 50%). Moodle لاحقًا إذا سمح الوقت.
 
 كيف بُني العمل:
 
