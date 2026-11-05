@@ -64,6 +64,9 @@ test('readme is English then Arabic and covers both guides', async () => {
     assert.match(part, /Cursor/);
     assert.match(part, /media\/feedback-scenario\.gif/);
     assert.match(part, /media\/safety-challenge\.gif/);
+    assert.match(part, /media\/scorm-feedback-registration\.png/);
+    assert.match(part, /media\/scorm-safety-registration\.png/);
+    assert.match(part, /SCORM Cloud/);
   }
   assert.notEqual(english.trim(), arabic.replace(/<[^>]+>/g, '').trim());
   assert.doesNotMatch(readme, /registration report is already in the repo/i);
