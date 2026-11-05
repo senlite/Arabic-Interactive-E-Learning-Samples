@@ -10,13 +10,14 @@
       started = api.LMSInitialize('') === 'true';
       var st = api.LMSGetValue('cmi.core.lesson_status');
       if (st === 'not attempted' || st === '') api.LMSSetValue('cmi.core.lesson_status', 'incomplete');
+      api.LMSCommit('');
       return started; },
     set: function (k, v) { if (started && !finished) return api.LMSSetValue(k, String(v)) === 'true'; console.debug('[SCORM]', k, v); return false; },
     score: function (raw) { this.set('cmi.core.score.min', 0); this.set('cmi.core.score.max', 100); this.set('cmi.core.score.raw', Math.round(raw)); },
     status: function (s) { this.set('cmi.core.lesson_status', s); },
     commit: function () { if (started && !finished) api.LMSCommit(''); },
     finish: function () { if (!started || finished) return; this.set('cmi.core.session_time', fmt(Date.now() - t0));
-      api.LMSFinish(''); finished = true; },
+      this.set('cmi.core.exit', ''); api.LMSCommit(''); api.LMSFinish(''); finished = true; },
     isLMS: function () { return started; }
   };
   w.addEventListener('pagehide', function () { S.finish(); });

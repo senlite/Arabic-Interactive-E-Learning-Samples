@@ -79,12 +79,6 @@ test('readme is English then Arabic and covers both guides', async () => {
 test('credits name every asset with a source and a licence', async () => {
   const credits = await readRoot('CREDITS.md');
   const rows = [
-    'feedback-scenario/img/cover.webp',
-    'feedback-scenario/img/ahmed.webp',
-    'feedback-scenario/img/sara.webp',
-    'feedback-scenario/img/end-best.webp',
-    'feedback-scenario/img/end-ok.webp',
-    'feedback-scenario/img/end-poor.webp',
     'safety-challenge/img/warehouse.webp',
     'safety-challenge/img/badge-gold.svg',
     'safety-challenge/img/badge-silver.svg',

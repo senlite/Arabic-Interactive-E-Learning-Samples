@@ -2,12 +2,6 @@
 
 | Asset | Source | Licence |
 |---|---|---|
-| `feedback-scenario/img/cover.webp` | ChatGPT image generation. prompt: Flat vector illustration, modern Gulf corporate office, a team leader and a male employee in a smart thobe talking calmly across a small meeting table, professional and respectful, soft teal palette, no text. File not in the repo yet. | Generated for this project |
-| `feedback-scenario/img/ahmed.webp` | ChatGPT image generation. prompt: Flat vector avatar of a male analyst, professional, circular crop, no text. File not in the repo yet. | Generated for this project |
-| `feedback-scenario/img/sara.webp` | ChatGPT image generation. prompt: professional woman in modest business attire with hijab, friendly expression, flat vector avatar, circular crop. File not in the repo yet. | Generated for this project |
-| `feedback-scenario/img/end-best.webp` | ChatGPT image generation. prompt: Flat vector, a smiling team celebrating a completed task, soft teal, no text. File not in the repo yet. | Generated for this project |
-| `feedback-scenario/img/end-ok.webp` | ChatGPT image generation. prompt: Flat vector, a calm office conversation with a mixed outcome, no text. File not in the repo yet. | Generated for this project |
-| `feedback-scenario/img/end-poor.webp` | ChatGPT image generation. prompt: Flat vector, a strained but respectful office conversation, no text. File not in the repo yet. | Generated for this project |
 | `safety-challenge/img/warehouse.webp` | Generated for this project. prompt: Flat vector illustration, clean modern warehouse interior, wide 16:9 view. Clearly visible and well separated: a puddle of liquid on the floor with no warning sign, left third; an emergency exit door blocked by stacked cardboard boxes, right side; a black electrical cable across the walkway, centre foreground; a red fire extinguisher mounted on the wall; a worker in a hard hat and hi-vis vest. No text, no logos. | Generated for this project |
 | `safety-challenge/img/iso7010-m014.svg` | Wikimedia Commons, ISO 7010 M014. https://commons.wikimedia.org/wiki/File:ISO_7010_M014.svg | public domain |
 | `safety-challenge/img/badge-gold.svg` | Drawn in `safety-challenge/js/app.js`, not a separate file. Gold medal labelled بطل السلامة. | Original |

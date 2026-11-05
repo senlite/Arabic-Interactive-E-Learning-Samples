@@ -66,16 +66,19 @@ test('init once, incomplete when untouched, score bounds, finish once', () => {
     'init',
     ['get', 'cmi.core.lesson_status'],
     ['set', 'cmi.core.lesson_status', 'incomplete'],
+    'commit',
     ['set', 'cmi.core.score.min', '0'],
     ['set', 'cmi.core.score.max', '100'],
     ['set', 'cmi.core.score.raw', '71'],
     ['set', 'cmi.core.lesson_status', 'completed'],
     'commit',
     ['set', 'cmi.core.session_time', time[2]],
+    ['set', 'cmi.core.exit', ''],
+    'commit',
     'finish'
   ]);
   assert.equal(api.calls.filter((c) => c === 'finish').length, 1);
-  assert.equal(api.calls.filter((c) => c === 'commit').length, 1);
-  assert.equal(api.values['cmi.core.exit'], undefined);
+  assert.equal(api.calls.filter((c) => c === 'commit').length, 3);
+  assert.equal(api.values['cmi.core.exit'], '');
   assert.match(api.values['cmi.core.session_time'], /^\d{4}:\d{2}:\d{2}$/);
 });
