@@ -24,7 +24,7 @@ How it was built:
 2. Cursor built the pages.
 3. A person checked them on a phone and in a learning system.
 
-Recordings (files may be absent; these links are the contract):
+Recordings:
 
 - [Feedback scenario](media/feedback-scenario.gif)
 - [Safety challenge](media/safety-challenge.gif)
@@ -62,7 +62,7 @@ gh release create v1.0 dist/feedback-scenario-scorm12.zip dist/safety-challenge-
 2. Cursor بنى الصفحات.
 3. راجعها شخص على الهاتف وفي نظام تعلم.
 
-التسجيلات (قد تغيب الملفات؛ الروابط هي الاتفاق):
+التسجيلات:
 
 - media/feedback-scenario.gif
 - media/safety-challenge.gif
