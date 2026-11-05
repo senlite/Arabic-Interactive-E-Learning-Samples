@@ -4,11 +4,10 @@ Two Arabic workplace samples for a portfolio.
 
 The feedback scenario, «محادثة التغذية الراجعة: موقف قيادي», is a three-decision conversation about giving feedback. The safety challenge, «تحدّي السلامة في موقع العمل», is ten questions about hazards on a work site.
 
-Live links, until the GitHub account is filled in:
+Live links, once GitHub Pages is enabled from the `main` branch root:
 
-- https://<account>.github.io/arabic-elearning-samples/
-- https://<account>.github.io/arabic-elearning-samples/feedback-scenario/
-- https://<account>.github.io/arabic-elearning-samples/safety-challenge/
+- https://senlite.github.io/Arabic-Interactive-E-Learning-Samples/feedback-scenario/
+- https://senlite.github.io/Arabic-Interactive-E-Learning-Samples/safety-challenge/
 
 To run locally, open index.html in a browser. The try links open `feedback-scenario/` and `safety-challenge/`.
 
@@ -17,7 +16,7 @@ To run locally, open index.html in a browser. The try links open `feedback-scena
 - `dist/feedback-scenario-scorm12.zip`
 - `dist/safety-challenge-scorm12.zip`
 
-Learning systems: SCORM Cloud first. The Moodle sandbox is the check if time allows.
+The intended learning-system check is SCORM Cloud with SCORM 1.2. The feedback sample should report `completed` plus a score. The safety sample should report `passed` or `failed` against 70. No registration report is in this repo, so that check is not claimed as already done. Moodle is a later check if time allows.
 
 How it was built:
 
@@ -34,7 +33,7 @@ Recordings (files may be absent; these links are the contract):
 
 ```sh
 git push -u origin main
-gh api --method POST repos/<account>/arabic-elearning-samples/pages -f build_type=legacy -f source.branch=main -f source.path=/
+gh api --method POST repos/senlite/Arabic-Interactive-E-Learning-Samples/pages -f build_type=legacy -f source.branch=main -f source.path=/
 gh release create v1.0 dist/feedback-scenario-scorm12.zip dist/safety-challenge-scorm12.zip
 ```
 
@@ -46,17 +45,16 @@ gh release create v1.0 dist/feedback-scenario-scorm12.zip dist/safety-challenge-
 
 محادثة التغذية الراجعة: موقف قيادي هي موقف من ثلاث قرارات. تحدّي السلامة في موقع العمل هو عشرة أسئلة عن مخاطر موقع العمل.
 
-روابط العرض إلى أن يُستبدل اسم الحساب:
+روابط العرض بعد تفعيل GitHub Pages من جذر الفرع `main`:
 
-- https://<account>.github.io/arabic-elearning-samples/
-- https://<account>.github.io/arabic-elearning-samples/feedback-scenario/
-- https://<account>.github.io/arabic-elearning-samples/safety-challenge/
+- https://senlite.github.io/Arabic-Interactive-E-Learning-Samples/feedback-scenario/
+- https://senlite.github.io/Arabic-Interactive-E-Learning-Samples/safety-challenge/
 
 للتشغيل محليًا افتح index.html في المتصفح. روابط التجربة تفتح `feedback-scenario/` و`safety-challenge/`.
 
-يبني `npm run package` حزمتي الدورة.
+يبني `npm run package` الحزمتين `dist/feedback-scenario-scorm12.zip` و`dist/safety-challenge-scorm12.zip`.
 
-نظم التعلم: SCORM Cloud أولًا. Moodle لاحقًا إذا سمح الوقت.
+الفحص المقصود هو SCORM Cloud بمعيار SCORM 1.2. عينة التغذية الراجعة تُبلّغ `completed` مع درجة. عينة السلامة تُبلّغ `passed` أو `failed` مقابل 70. لا يوجد تقرير تسجيل في هذا المستودع، لذا لا يُدّعى أن الفحص تم. Moodle لاحقًا إذا سمح الوقت.
 
 كيف بُني العمل:
 

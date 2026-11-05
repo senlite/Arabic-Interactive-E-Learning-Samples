@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
-import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm, readFile, chmod, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -41,6 +41,56 @@ test('packaging exits non-zero when a sample folder or required shared file is m
   await mkdir(path.join(root, 'shared'), { recursive: true });
   await writeFile(path.join(root, 'shared', 'base.css'), 'body{}');
   await assert.rejects(() => packageSamples(root));
+  await rm(root, { recursive: true, force: true });
+});
+
+test('a failed package leaves previous zips unchanged and no partial archive', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'pkg-fail-'));
+  for (const id of Object.keys(TITLES)) {
+    await mkdir(path.join(root, id), { recursive: true });
+    await writeFile(path.join(root, id, 'index.html'), '<html></html>');
+  }
+  await mkdir(path.join(root, 'shared'), { recursive: true });
+  for (const name of ['base.css', 'i18n.js', 'scorm12.js', 'xapi-stub.js']) {
+    await writeFile(path.join(root, 'shared', name), '/* shared */');
+  }
+  await packageSamples(root);
+  const finals = {};
+  for (const id of Object.keys(TITLES)) {
+    finals[id] = await readFile(path.join(root, 'dist', `${id}-scorm12.zip`));
+  }
+  const blocked = path.join(root, 'safety-challenge', 'blocked.bin');
+  await writeFile(blocked, 'nope');
+  await chmod(blocked, 0);
+  await assert.rejects(() => packageSamples(root));
+  for (const id of Object.keys(TITLES)) {
+    const again = await readFile(path.join(root, 'dist', `${id}-scorm12.zip`));
+    assert.deepEqual(again, finals[id]);
+  }
+  const distNames = await readdir(path.join(root, 'dist'));
+  assert.equal(distNames.some((name) => name.endsWith('.zip.partial')), false);
+  await chmod(blocked, 0o644);
+  await rm(root, { recursive: true, force: true });
+});
+
+test('a missing shared file does not replace planted zips', async () => {
+  const root = await mkdtemp(path.join(tmpdir(), 'pkg-miss-'));
+  await mkdir(path.join(root, 'dist'), { recursive: true });
+  for (const id of Object.keys(TITLES)) {
+    await mkdir(path.join(root, id), { recursive: true });
+    await writeFile(path.join(root, 'dist', `${id}-scorm12.zip`), `planted-${id}`);
+  }
+  await mkdir(path.join(root, 'shared'), { recursive: true });
+  await assert.rejects(
+    () => packageSamples(root),
+    (error) => error.message.includes('Missing shared file: base.css')
+  );
+  for (const id of Object.keys(TITLES)) {
+    const body = await readFile(path.join(root, 'dist', `${id}-scorm12.zip`), 'utf8');
+    assert.equal(body, `planted-${id}`);
+  }
+  const distNames = await readdir(path.join(root, 'dist'));
+  assert.equal(distNames.some((name) => name.endsWith('.zip.partial')), false);
   await rm(root, { recursive: true, force: true });
 });
 

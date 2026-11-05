@@ -1,4 +1,4 @@
-import { access, mkdir, readdir, writeFile, rm } from 'node:fs/promises';
+import { access, mkdir, readdir, writeFile, rm, rename } from 'node:fs/promises';
 import path from 'node:path';
 import { createWriteStream } from 'node:fs';
 import archiver from 'archiver';
@@ -64,8 +64,17 @@ function zipDirectory(dir, dest) {
   return new Promise((resolve, reject) => {
     const output = createWriteStream(dest);
     const archive = archiver('zip', { zlib: { level: 9 } });
-    output.on('close', resolve);
-    archive.on('error', reject);
+    let failed = false;
+    const fail = (error) => {
+      if (failed) return;
+      failed = true;
+      reject(error);
+    };
+    output.on('close', () => {
+      if (!failed) resolve();
+    });
+    output.on('error', fail);
+    archive.on('error', fail);
     archive.pipe(output);
     archive.directory(dir, false);
     archive.finalize();
@@ -88,14 +97,28 @@ export async function packageSamples(root = process.cwd()) {
     }
   }
   await syncShared(root);
-  await mkdir(path.join(root, 'dist'), { recursive: true });
-  for (const id of Object.keys(SAMPLES)) {
-    const dir = path.join(root, id);
-    const files = (await walk(dir)).filter((file) => file !== 'imsmanifest.xml');
-    await writeFile(path.join(dir, 'imsmanifest.xml'), buildManifest(id, files), 'utf8');
-    const zipPath = path.join(root, 'dist', `${id}-scorm12.zip`);
-    await rm(zipPath, { force: true });
-    await zipDirectory(dir, zipPath);
+  const dist = path.join(root, 'dist');
+  await mkdir(dist, { recursive: true });
+  const pending = [];
+  try {
+    for (const id of Object.keys(SAMPLES)) {
+      const dir = path.join(root, id);
+      const files = (await walk(dir)).filter((file) => file !== 'imsmanifest.xml');
+      await writeFile(path.join(dir, 'imsmanifest.xml'), buildManifest(id, files), 'utf8');
+      const partial = path.join(dist, `${id}-scorm12.zip.partial`);
+      await rm(partial, { force: true });
+      await zipDirectory(dir, partial);
+      pending.push({ partial, final: path.join(dist, `${id}-scorm12.zip`) });
+    }
+    for (const item of pending) {
+      await rm(item.final, { force: true });
+      await rename(item.partial, item.final);
+    }
+  } catch (error) {
+    for (const id of Object.keys(SAMPLES)) {
+      await rm(path.join(dist, `${id}-scorm12.zip.partial`), { force: true });
+    }
+    throw error;
   }
 }
 

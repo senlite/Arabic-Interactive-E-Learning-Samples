@@ -11,5 +11,6 @@ Run one prompt per `/speckit-specify` invocation, in this order. Paste the body 
 | 3 | `03-safety-challenge.md` | Gamified safety challenge |
 | 4 | `04-scorm-package.md` | SCORM 1.2 zips and local LMS harness |
 | 5 | `05-landing-readme.md` | Landing page, README, credits, Pages-ready paths |
+| 6 | `06-release-handoff.md` | Package check, `.nojekyll`, smoke-path fixes, bilingual docs, landing links |
 
-Do not merge these into one specification. Learner-facing Arabic stays in the requirements file and must be copied verbatim when a later command implements the feature.
+Do not merge these into one specification. Prompt 6 assumes 1–5 and closes only the Friday handoff. It does not repeat activity design. Learner-facing Arabic stays in the requirements file and must be copied verbatim when a later command implements the feature.

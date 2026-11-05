@@ -30,9 +30,11 @@ test('home page matches the front-door contract', async () => {
   assert.match(html, /href="\.\/safety-challenge\/"/);
   assert.match(html, /lang="ar"[^>]*dir="rtl"[^>]*>جرّب النموذج</);
   assert.match(html, /Download SCORM 1\.2/);
-  assert.match(html, /https:\/\/github\.com\/<account>\/arabic-elearning-samples\/releases\/download\/v1\.0\/feedback-scenario-scorm12\.zip/);
-  assert.match(html, /https:\/\/github\.com\/<account>\/arabic-elearning-samples\/releases\/download\/v1\.0\/safety-challenge-scorm12\.zip/);
-  assert.doesNotMatch(html, /href="(?:\.\/|\/dist\/)[^"]*scorm12\.zip"/);
+  assert.match(html, /href="\.\/dist\/feedback-scenario-scorm12\.zip"/);
+  assert.match(html, /href="\.\/dist\/safety-challenge-scorm12\.zip"/);
+  const releaseNotes = html.match(/<!--[^>]*RELEASE_PAGE[^>]*-->/g) || [];
+  assert.equal(releaseNotes.length, 1);
+  assert.match(releaseNotes[0], /https:\/\/github\.com\/senlite\/Arabic-Interactive-E-Learning-Samples\/releases\/tag\/v1\.0/);
   assert.match(html, /Claude/);
   assert.match(html, /Cursor/);
   assert.match(html, /phone/);
@@ -49,16 +51,22 @@ test('readme is English then Arabic and covers both guides', async () => {
   assert.match(english, /safety challenge/);
   assert.doesNotMatch(english, /<div dir="rtl"/);
   for (const part of [english, arabic]) {
-    assert.match(part, /https:\/\/<account>\.github\.io\/arabic-elearning-samples\//);
-    assert.match(part, /feedback-scenario\//);
-    assert.match(part, /safety-challenge\//);
+    assert.match(part, /https:\/\/senlite\.github\.io\/Arabic-Interactive-E-Learning-Samples\/feedback-scenario\//);
+    assert.match(part, /https:\/\/senlite\.github\.io\/Arabic-Interactive-E-Learning-Samples\/safety-challenge\//);
     assert.match(part, /npm run package/);
-    assert.ok(part.indexOf('SCORM Cloud') < part.indexOf('Moodle') && part.includes('SCORM Cloud'));
+    assert.match(part, /dist\/feedback-scenario-scorm12\.zip/);
+    assert.match(part, /dist\/safety-challenge-scorm12\.zip/);
+    assert.match(part, /completed/);
+    assert.match(part, /passed/);
+    assert.match(part, /failed/);
+    assert.match(part, /70/);
     assert.match(part, /Claude/);
     assert.match(part, /Cursor/);
     assert.match(part, /media\/feedback-scenario\.gif/);
     assert.match(part, /media\/safety-challenge\.gif/);
   }
+  assert.notEqual(english.trim(), arabic.replace(/<[^>]+>/g, '').trim());
+  assert.doesNotMatch(readme, /registration report is already in the repo/i);
   assert.match(english, /open index\.html/);
   assert.match(arabic, /index\.html/);
   assert.match(arabic, /محادثة التغذية الراجعة/);
